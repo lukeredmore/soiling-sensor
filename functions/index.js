@@ -64,7 +64,7 @@ exports.sendLightValue = functions
               .set(req.body.imageEncoded)
             return res.status(200).json({
               message:
-                "Successfully added image,"
+                "Successfully added image"
             })
           } catch (err) {
             return res.status(500).json({ message: err.localizedDescription })
