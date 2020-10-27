@@ -1,0 +1,31 @@
+.picture-viewer {
+    text-align: center;
+    padding: 4px;
+    padding-top: 80pt;
+    .picture-entry {
+        img { transition: 300ms ease all; 
+        user-select: none;}
+        display: inline-block;
+        position: relative;
+        margin: 16px;
+        &:hover {
+            img { opacity: 0.5; }
+            .delete-icon {
+                color: #FFFFFFFF;
+            }
+        }
+        .date-label {
+            text-align: center;
+        }
+        .delete-icon {
+            user-select: none;
+            transition: 300ms ease all;
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            color: #FFFFFF00;
+            font-size: 32px;
+            cursor: pointer;
+        }
+    }
+}

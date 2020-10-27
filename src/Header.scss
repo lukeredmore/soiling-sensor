@@ -1,0 +1,42 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(100% - 50pt);
+    height: 35pt;
+    padding: 25pt;
+    position: fixed;
+    top: 0;
+    background-color: white;
+    img {
+        position: absolute;
+        left: 25pt;
+        object-fit: contain;
+        display: inline-block;
+        height: 40pt;
+    }
+    .capture-button {
+        .material-icons {
+            margin-left: 8px;
+        }
+        display: inline-flex;
+        align-items: center;
+        text-align: center;
+        background-color: #00539B;
+        color: white;
+        padding: 9px 18px;
+        font-weight: 600;
+        font-size: 20px;
+        border-radius: 12px;
+        user-select: none;
+        cursor: pointer;
+    }
+    .title {
+       position: absolute;
+       display: inline-block;
+       right: 25pt;
+       text-align: right;
+       font-size: 25pt;
+       max-width: 400px;
+    }
+}
