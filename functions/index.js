@@ -48,28 +48,32 @@ exports.sendLightValue = functions
     })
   })
 
-// const sendSMS = async (messageToSend) => {
-//   let toReturn = {}
-//   try {
-//     const config = {
-//       headers: {
-//         "Content-Type": "application/x-www-form-urlencoded",
-//       },
-//       method: "POST",
-//       body: `apikey=QnaBw7+plag-bnZfFpmeXSq8SmFi6j85M6YtNg35k6&message=${messageToSend}&sender=TEST SENDER&numbers=6077278129`,
-//     }
-//     console.log(config)
-//     const response = await fetch("https://api.txtlocal.com/send/?", config)
-//     const status = response.status
-//     const message = await response.json()
-//     toReturn = { status, message }
-//     console.log(JSON.stringify(message))
-//   } catch (err) {
-//     toReturn = {
-//       status: 500,
-//       message: err,
-//     }
-//   }
 
-//   return
-// }
+  exports.storeImage = functions
+    .region("us-east4")
+    .https.onRequest((req, res) => {
+      cors(req, res, async () => {
+        if (req.body.imageEncoded) {
+          try {
+
+            const date = new Date()
+            date.toLocaleTimeString
+            await admin
+              .database()
+              .ref("Images/" + date.getTime())
+              .set(req.body.imageEncoded)
+            return res.status(200).json({
+              message:
+                "Successfully added image,"
+            })
+          } catch (err) {
+            return res.status(500).json({ message: err.localizedDescription })
+          }
+        } else {
+          return res
+            .status(400)
+            .json({ message: "No image provided!" })
+        }
+      })
+    })
+
