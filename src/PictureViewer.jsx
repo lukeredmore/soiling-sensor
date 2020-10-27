@@ -15,7 +15,7 @@ export default () => {
   useEffect(() => {
     setImagesRef(
       getContinuousDataFromRef("Images", (imagesObject) => {
-        if (imagesObject) setImages(Object.entries(imagesObject).sort())
+        if (imagesObject) setImages(Object.entries(imagesObject).sort().reverse())
         else {
           setImages({isEmpty: true})
         }

@@ -16,6 +16,10 @@
         height: 40pt;
     }
     .capture-button {
+        transition: 300ms ease all;
+        &:active {
+            box-shadow: 0 0 10px black;
+        }
         .material-icons {
             margin-left: 8px;
         }
@@ -32,6 +36,7 @@
         cursor: pointer;
     }
     .title {
+        
        position: absolute;
        display: inline-block;
        right: 25pt;
@@ -39,4 +44,12 @@
        font-size: 25pt;
        max-width: 400px;
     }
+@media only screen and (max-width: 700px) {
+.title {
+    display: none;
+}     
+img {
+    display: none;
+}
+}
 }
