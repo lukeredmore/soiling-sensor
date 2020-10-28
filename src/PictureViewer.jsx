@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react"
-import { Row, Col } from "shards-react"
-import {
-  getContinuousDataFromRef,
-  getDataFromRef,
-  removeAtRef,
-} from "./firebase"
+import { getContinuousDataFromRef, removeAtRef } from "./firebase"
 import LoadingSymbol from "./LoadingSymbol"
+import PictureModal from "./PictureModal"
 import "./PictureViewer.scss"
 
 export default () => {
   const [images, setImages] = useState(null)
+  const [selectedImage, setSelectedImage] = useState(null)
   const setImagesRef = useState(null)[1]
 
   useEffect(() => {
     setImagesRef(
       getContinuousDataFromRef("Images", (imagesObject) => {
-        if (imagesObject) setImages(Object.entries(imagesObject).sort().reverse())
+        if (imagesObject)
+          setImages(Object.entries(imagesObject).sort().reverse())
         else {
-          setImages({isEmpty: true})
+          setImages({ isEmpty: true })
         }
       })
     )
@@ -31,29 +29,49 @@ export default () => {
       ) : images.isEmpty ? (
         <div>No images found</div>
       ) : (
-        <Row>
-          {images.map(([dateString, image]) => {
+        <div className="pic-container">
+          {images.map(([dateString, image], i) => {
             const date = new Date(Number(dateString))
             return (
-              <Col md="3" lg="2" className="picture-entry">
-                <img src={image} />
+              <div key={i} className="picture-entry">
+                <img
+                  src={image}
+                  onClick={() =>
+                    setSelectedImage({ dateString, image, index: i })
+                  }
+                />
                 <div className="date-label">
                   {date.toLocaleDateString("en-us") +
                     " " +
                     date.toLocaleTimeString("en-us")}
                 </div>
-                <i
-                  className="material-icons delete-icon"
-                  onClick={() => {
-                    removeAtRef("Images/" + dateString)
-                  }}
-                >
-                  delete
-                </i>
-              </Col>
+                
+              </div>
             )
           })}
-        </Row>
+        </div>
+      )}
+      {selectedImage && (
+        <PictureModal
+        onDelete={() => {
+          removeAtRef("Images/" + selectedImage.dateString)
+          setSelectedImage(null)
+        }}
+          onBack={() => {
+            const index = selectedImage.index - 1
+            if (!images[index]) return
+            const [dateString, image] = images[index]
+            setSelectedImage({ dateString, image, index })
+          }}
+          onForward={() => {
+            const index = selectedImage.index + 1
+            if (!images[index]) return
+            const [dateString, image] = images[index]
+            setSelectedImage({ dateString, image, index })
+          }}
+          onClose={() => setSelectedImage(null)}
+          {...selectedImage}
+        />
       )}
     </div>
   )

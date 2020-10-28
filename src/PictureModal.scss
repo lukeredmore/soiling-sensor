@@ -1,0 +1,50 @@
+.picture-modal {
+  .modal .modal-dialog {
+    max-width: 80%;
+    .modal-body {
+      position: relative;
+      .material-icons {
+        user-select: none;
+        cursor: pointer;
+        position: absolute;
+        &.close-icon {
+          top: 4px;
+          font-size: 26px;
+          right: 4px;
+        }
+        &.back-icon {
+            top: 50%;
+            transform: translateY(-50%);
+            left: 18px;
+            font-size: 72px;
+        }
+        &.forward-icon {
+            top: 50%;
+            transform: translateY(-50%);
+            right: 12px;
+            font-size: 72px;
+        }
+        &.delete-icon {
+            position: absolute;
+            top: 4px;
+            right: 8px;
+            color: #b40000;
+            font-size: 32px;
+            cursor: pointer;
+        }
+      }
+
+      img {
+        width: 100%;
+        max-height: 80vh;
+        object-fit: contain;
+      }
+      .date-label {
+          position: relative;
+        font-size: 26px;
+        display: inline-block;
+        width: 80%;
+      }
+    }
+  }
+}
