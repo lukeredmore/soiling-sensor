@@ -77,3 +77,14 @@ exports.sendLightValue = functions
       })
     })
 
+
+exports.imageTest = functions
+    .region("us-east4").runWith({memory: '512MB'})
+    .https.onRequest((req, res) => {
+      cors(req, res, async () => {
+
+        console.log(req.body)
+        console.log(req.file)
+
+      })})
+
