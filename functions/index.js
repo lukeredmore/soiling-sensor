@@ -19,7 +19,7 @@ exports.sendLightValue = functions
           const emails = snapshot.val() ? Object.values(snapshot.val()).reduce((prev, current) => prev + ", " + current) : ""
 
           const date = new Date()
-          date.toLocaleTimeString
+          date.toLocaleTimeString()
           await admin
             .database()
             .ref("LightLevels/" + date.getTime())
@@ -50,14 +50,14 @@ exports.sendLightValue = functions
 
 
   exports.storeImage = functions
-    .region("us-east4")
+    .region("us-east4").runWith({memory: '512MB'})
     .https.onRequest((req, res) => {
       cors(req, res, async () => {
         if (req.body.imageEncoded) {
           try {
 
             const date = new Date()
-            date.toLocaleTimeString
+            date.toLocaleTimeString()
             await admin
               .database()
               .ref("Images/" + date.getTime())
