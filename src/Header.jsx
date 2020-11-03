@@ -1,17 +1,26 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import DukeWordmark from "./duke-wordmark.svg"
-import { writeToRef } from "./firebase"
+import { getContinuousDataFromRef, writeToRef } from "./firebase"
 
 import "./Header.scss"
-export default () => (
+export default () => {
+  const [shutterOpen, setShutterOpen] = useState(null)
+  const setShutterOpenRef = useState(null)[1]
+
+  useEffect(() => {
+    setShutterOpenRef(
+      getContinuousDataFromRef("ShutterOpen", (val) => {
+        setShutterOpen(val)
+      })
+    )
+    return () => setShutterOpenRef(null)
+  }, [])
+  return(
   <div className="header">
     <img src={DukeWordmark} />
-    <span className='capture-button' onClick={() => {
-        writeToRef('ShutterOpen', true)
-        setTimeout(() => {
-            writeToRef('ShutterOpen', false)
-        }, 2000)
-    }}>Capture <i className="material-icons">photo_camera</i> </span>
+    {shutterOpen === 0 ? <span className='capture-button' onClick={() => {
+        writeToRef('ShutterOpen', new Date().getTime())
+    }}>Capture <i className="material-icons">photo_camera</i> </span> : "Capturing..."}
     <span className='title'>Soiling Sensor Images</span>
   </div>
-)
+)}

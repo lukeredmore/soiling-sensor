@@ -27,7 +27,7 @@ export default () => {
       {images === null ? (
         <LoadingSymbol />
       ) : images.isEmpty ? (
-        <div>No images found</div>
+        <div className='mt-4'>No images found</div>
       ) : (
         <div className="pic-container">
           {images.map(([dateString, image], i) => {
@@ -35,7 +35,7 @@ export default () => {
             return (
               <div key={i} className="picture-entry">
                 <img
-                  src={image}
+                  src={Object.values(image).join("")}
                   onClick={() =>
                     setSelectedImage({ dateString, image, index: i })
                   }

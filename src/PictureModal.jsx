@@ -42,7 +42,7 @@ export default ({
           <i className="material-icons forward-icon" onClick={onForward}>
             arrow_forward_ios
           </i>
-          <img src={image} />
+          <img src={Object.values(image).join("")} />
           <div className="date-label">
             {date.toLocaleDateString("en-us") +
               " " +

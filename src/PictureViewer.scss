@@ -8,7 +8,9 @@
         flex-wrap: wrap;
     }
     .picture-entry {
-        img { transition: 300ms ease all; 
+        img { 
+            max-width: 300px;
+            transition: 300ms ease all; 
         user-select: none;}
         display: inline-block;
         position: relative;
