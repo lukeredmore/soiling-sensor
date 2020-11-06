@@ -1,0 +1,20 @@
+.picture-thumbnail {
+    img { 
+            max-width: 300px;
+            transition: 300ms ease all; 
+        user-select: none;}
+        display: inline-block;
+        position: relative;
+        flex-grow: 1;
+        margin: 12px;
+        &:hover {
+            cursor: pointer;
+            img { opacity: 0.6; }
+            .delete-icon {
+                color: #FFFFFFFF;
+            }
+        }
+        .date-label {
+            text-align: center;
+        }
+}

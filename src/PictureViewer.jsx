@@ -3,6 +3,8 @@ import { getContinuousDataFromRef, removeAtRef } from "./firebase"
 import LoadingSymbol from "./LoadingSymbol"
 import PictureModal from "./PictureModal"
 import "./PictureViewer.scss"
+import PictureThumbnail from "./PictureThumbnail"
+
 
 export default () => {
   const [images, setImages] = useState(null)
@@ -31,22 +33,15 @@ export default () => {
       ) : (
         <div className="pic-container">
           {images.map(([dateString, image], i) => {
-            const date = new Date(Number(dateString))
+            
             return (
-              <div key={i} className="picture-entry">
-                <img
-                  src={Object.values(image).join("")}
-                  onClick={() =>
-                    setSelectedImage({ dateString, image, index: i })
-                  }
-                />
-                <div className="date-label">
-                  {date.toLocaleDateString("en-us") +
-                    " " +
-                    date.toLocaleTimeString("en-us")}
-                </div>
-                
-              </div>
+              <PictureThumbnail
+              index={i}
+                key={i}
+                dateString={dateString}
+                image={image}
+                onClick={(e) => setSelectedImage(e)}
+              />
             )
           })}
         </div>
