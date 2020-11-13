@@ -25,8 +25,10 @@ export default ({image, dateString, onClick, index}) => {
         <div className="date-label">
           {date.toLocaleDateString("en-us") +
             " " +
-            date.toLocaleTimeString("en-us") +
-            "\nAverage Gray: " +
+            date.toLocaleTimeString("en-us")}
+        </div>
+        <div className="average-grey-label">
+          {"Average Grayscale Value: " +
             JSON.stringify(color?.value[0])}
         </div>
       </div>
