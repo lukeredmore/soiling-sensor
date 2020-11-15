@@ -1,9 +1,11 @@
+/* eslint-disable import/no-anonymous-default-export */
 import React, { useEffect } from "react"
 import { Modal, ModalBody } from "shards-react"
 import "./PictureModal.scss"
 import { useKeyPress } from "./hooks"
 import "bootstrap/dist/css/bootstrap.min.css"
 import "shards-ui/dist/css/shards.min.css"
+import { useSelector } from "react-redux"
 
 export default ({
   dateString,
@@ -26,6 +28,10 @@ export default ({
   useEffect(() => {
     if (escape) onClose()
   }, [escape])
+
+  const colorObj = useSelector(({ image }) =>
+    image?.grayscale?.find(([dateStringKey]) => dateString === dateStringKey)
+  )
 
   const date = new Date(Number(dateString))
 
@@ -54,6 +60,11 @@ export default ({
             >
               delete
             </i>
+            <div className="average-grey-label">
+              {colorObj
+                ? "Average Grayscale Value: " + colorObj[1]
+                : "Loading..."}
+            </div>
           </div>
         </ModalBody>
       </Modal>

@@ -1,0 +1,18 @@
+.graph-viewer {
+    margin: 0 auto;
+    padding: 0 auto;
+    margin-top: 100px;
+    svg {
+        margin: 0 auto;
+        margin-top: 10px;
+    }
+
+    .toggle-graph-label {
+        margin-left: 25px;
+        user-select: none;
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
